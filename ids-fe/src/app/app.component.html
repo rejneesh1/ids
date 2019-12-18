@@ -1,0 +1,38 @@
+<button
+  class="btn btn-warning btn-block"
+  (click)="getTableData()"
+  *ngIf="!tableData$"
+>
+  Fetch Data
+</button>
+<table class="table table-striped" *ngIf="tableData$; else loadingTable">
+  <thead>
+    <tr>
+      <th scope="col">S.no</th>
+      <th scope="col">Id</th>
+      <th scope="col">Level</th>
+      <th scope="col">CVSS</th>
+      <th scope="col">Title</th>
+      <th scope="col">Vulnerability</th>
+      <th scope="col">Solution</th>
+      <th scope="col">Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of tableData$ | async; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>{{ data.id | number }}</td>
+      <td>{{ data.level }}</td>
+      <td>{{ data.cvss | number }}</td>
+      <td>{{ data.title }}</td>
+      <td>{{ data.Vulnerability }}</td>
+      <td>{{ data.Solution }}</td>
+      <td>{{ data.reference }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loadingTable>
+  Click To Fetch Data. It may take 5-6 sec to get tha Data
+</ng-template>
